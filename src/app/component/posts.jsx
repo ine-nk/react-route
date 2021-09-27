@@ -2,16 +2,17 @@ import PostsList from './postsList'
 import Post from './post'
 // import query from 'query-string'
 // import _ from 'lodash'
+import { useParams } from 'react-router-dom'
 
 
-
-const Posts = ({ match, history }) => {
+const Posts = () => {
+  const params = useParams()
   const posts = [
     { id: 1, label: 'post 1' },
     { id: 2, label: 'post 2' },
     { id: 3, label: 'post 3' },
   ]
-  const postId = match.params.postId
+  const { postId } = params
   // const search = query.parse(location.search)
   // console.log('search ========== ', search)
 
@@ -20,12 +21,11 @@ const Posts = ({ match, history }) => {
     <>
       { postId ?
         (
-          <Post posts={ posts } 
-          id={ postId } 
-          history={ history }  
+          <Post posts={ posts }
+            id={ postId }
           />
-      ) : (
-      < PostsList posts={ posts } />)
+        ) : (
+          < PostsList posts={ posts } />)
       }
     </>)
 }

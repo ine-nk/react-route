@@ -199,6 +199,29 @@ git remote add origin https://github.com/ine-nk/react-route.git
 git branch -M main
 git push -u origin main
 
-### Хуки react-router-dom
+## Хуки react-router-dom
+
+вместо  передачи объектов __history__,  __match__, __location__   из родительских компонентов можно воспользоваться програмными хуками
+
+> _для этого мы вызваем в дочернем объекте хук и получаем доступ к этому объекту_
+
+`import { useHistory } from 'react-router-dom'` (для прогаммной навигации) и нуже для того чтобы мы могли переадресовывать пользователя на нужные страницы
+
+useHistory : содержит в себе все history  для  данного компонента
+`const history = useHistory()`
+  и используем эту константу как объект history
+
+  **таким же методом можно и заменить {match}**
+  `import { useParams } from 'react-router-dom'`
+  `const params = useParams()`
+  и далее деструктуризируя `params`
+  `const { postId } = params`
+  используем все те же как и с **match** методы
+
+если надо получить **query** _параметры_ то надо использовать
+ `useLocation()`
+
+## Вложенные маршруты
 
 
+ 
