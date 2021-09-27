@@ -124,7 +124,6 @@ RouterProvider > location > search
 и так как параметр search находится в location - то надо деструктуризировать в Posts еще и location
 отображение `const search = query.parse(location.search)`
 
-
 ## пагинаци
 
 через query параметры
@@ -132,13 +131,13 @@ RouterProvider > location > search
 строка запроса: `http://localhost:3000/posts?count=1`
 
 `const cropPosts = search.count ? _(posts).slice(0).take(search.count).value() : posts`
-где `search.count=1` 
+где `search.count=1`
 
 таким образом в бэкэнд можно передать запрашиваемое количество чего-либо, на фронэнде так можно передать имя пользователя на другую страницу
 
 ## редирект
 
-когда идет запрос на несуществующую странцицу по маршрутизатор долже перевести на страницу  404
+когда идет запрос на несуществующую странцицу по маршрутизатор долже перевести на страницу 404
 через `Redirect`
 
 случай1: когда перенаправление на страницу 404
@@ -149,14 +148,57 @@ RouterProvider > location > search
 
 случай2:
 когда надо делать перенаправление со старых страниц на новые
-была страница /admin  и ее надо закинуть на /dashboard
+была страница /admin и ее надо закинуть на /dashboard
 `<Redirect from="/admin" to="/dashboard" />`
 
 ## History
 
-в свойствах history есть  методы push и  replace
+в свойствах history есть методы push и replace
+
 > push перенаправляет пользователя на другую страницу без ее перезагрузки
 
-> replace  заменяет перенаправленную страницу и обратного переключения не будет
-т.е. в объекте history  не добавляется новое событие а заменяется текущая страница
+> replace заменяет перенаправленную страницу и обратного переключения не будет
+> т.е. в объекте history не добавляется новое событие а заменяется текущая страница
+
+### логика перехода на страницу каждого поста
+
+реализация через Link - каждый пост будет ссылка
+в PostList добавим Link и задаем ему роут куда нужно перекинуть
+`const PostsList = ({ posts }) => { return ( <> { posts.map((post) => ( <Link key={ post.id } to={`posts/\${post.id}`}> <h3 >{ post.label }</h3> </Link>)) } </>) }`
+в свойстве to формируем адресную строку для поста с номером id
+
+### реализация возврата пользователя на страницу всех постов
+
+на станице постов создадим кнопку которая будет перенаправлять на страницу всех постов
+кнопка Сохранить
+событие onClick
+метод обработки handleSave()
+нужен для него history
+забираем из родительского posts объект history
+
+и в функции делаем push на страницу постов '/posts'
+`const handleSave = () => { history.push('/posts') }`
+и мы можем переходить и через кнопку на посты и через стрелку обратно
+
+если вместо push сделать replace то стрелка назад не будет работать. возврата внуть поста на редактирование не будет
+`const handleSave = () => { history.replace('/posts') }`
+
+## git
+
+…or create a new repository on the command line
+echo "# react-route" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ine-nk/react-route.git
+git push -u origin main
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/ine-nk/react-route.git
+git branch -M main
+git push -u origin main
+
+### Хуки react-router-dom
+
 
