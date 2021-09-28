@@ -201,27 +201,34 @@ git push -u origin main
 
 ## Хуки react-router-dom
 
-вместо  передачи объектов __history__,  __match__, __location__   из родительских компонентов можно воспользоваться програмными хуками
+вместо передачи объектов **history**, **match**, **location** из родительских компонентов можно воспользоваться програмными хуками
 
 > _для этого мы вызваем в дочернем объекте хук и получаем доступ к этому объекту_
 
 `import { useHistory } from 'react-router-dom'` (для прогаммной навигации) и нуже для того чтобы мы могли переадресовывать пользователя на нужные страницы
 
-useHistory : содержит в себе все history  для  данного компонента
+useHistory : содержит в себе все history для данного компонента
 `const history = useHistory()`
-  и используем эту константу как объект history
+и используем эту константу как объект history
 
-  **таким же методом можно и заменить {match}**
-  `import { useParams } from 'react-router-dom'`
-  `const params = useParams()`
-  и далее деструктуризируя `params`
-  `const { postId } = params`
-  используем все те же как и с **match** методы
+**таким же методом можно и заменить {match}**
+`import { useParams } from 'react-router-dom'`
+`const params = useParams()`
+и далее деструктуризируя `params`
+`const { postId } = params`
+используем все те же как и с **match** методы
 
 если надо получить **query** _параметры_ то надо использовать
- `useLocation()`
+`useLocation()`
 
-## Вложенные маршруты
+## Вложенные маршруты (Nested routes)
 
+когда есть много подпутей из родительского то можно перенести эти пути внутрь родительского
 
- 
+`<Route path="/dashboard/stats" component={Stats} />`
+`<Route path="/dashboard" component={Dashboard} />`
+
+в `dashboard`
+
+<Route path="/dashboard/" component={Stats} /> - статистика откроется по умолчанию
+

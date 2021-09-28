@@ -6,7 +6,7 @@ import Login from './component/login'
 import Posts from './component/posts'
 // import PostsList from './component/postsList'
 // import Post from './component/post'
-import Stats from './component/stats'
+// import Stats from './component/stats'
 import NotFound from './component/not-found'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <h1>App</h1>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/dashboard/stats" component={Stats} />
+        {/* <Route path="/dashboard/stats" component={Stats} /> */}
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/login" component={Login} />
         <Route
